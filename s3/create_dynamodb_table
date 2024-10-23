@@ -1,0 +1,30 @@
+import boto3
+
+# Initialize a session using Amazon DynamoDB
+dynamodb = boto3.resource('dynamodb')
+
+# Create the DynamoDB table
+table = dynamodb.create_table(
+    TableName='hackathon-user-table',
+    KeySchema=[
+        {
+            'AttributeName': 'userid',
+            'KeyType': 'HASH'  # Partition key
+        }
+    ],
+    AttributeDefinitions=[
+        {
+            'AttributeName': 'userid',
+            'AttributeType': 'S'
+        }
+    ],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 2,
+        'WriteCapacityUnits': 2
+    }
+)
+
+# Wait until the table exists.
+table.meta.client.get_waiter('table_exists').wait(TableName='hackathon-user-table')
+
+print("Table created successfully.")
