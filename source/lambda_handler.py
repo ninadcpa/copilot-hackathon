@@ -16,8 +16,9 @@ def get_user_policies(userid):
 def create_iam_role_if_not_exists(role_name, trust_policy):
     iam_client = boto3.client('iam')
     try:
-        iam_client.get_role(RoleName=role_name)
+        response = iam_client.get_role(RoleName=role_name)
         print(f"Role {role_name} already exists")
+        return response['Role']        
     except iam_client.exceptions.NoSuchEntityException:
         try:
             response = iam_client.create_role(
@@ -58,6 +59,7 @@ def generate_sts_token(role_arn, session_name):
 def lambda_handler(event, context):
     # 1. Get userid from lambda event
     userid = event.get('userid')
+    print(f"userid is {userid}")
     if not userid:
         return {
             'statusCode': 400,
@@ -80,7 +82,8 @@ def lambda_handler(event, context):
             {
                 "Effect": "Allow",
                 "Principal": {
-                    "Service": "lambda.amazonaws.com"
+                    "Service": "lambda.amazonaws.com",
+                    "AWS": "arn:aws:iam::478311086064:role/hackathon-sts-system-role"
                 },
                 "Action": "sts:AssumeRole"
             }
@@ -110,7 +113,7 @@ def lambda_handler(event, context):
         'body': json.dumps({
             'AccessKeyId': credentials['AccessKeyId'],
             'SecretAccessKey': credentials['SecretAccessKey'],
-            'SessionToken': credentials['SessionToken'],
-            'Expiration': credentials['Expiration']
+            'SessionToken': credentials['SessionToken']
+            ##'Expiration': credentials['Expiration']
         })
     }
