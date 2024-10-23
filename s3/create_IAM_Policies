@@ -1,0 +1,61 @@
+import boto3
+
+# Initialize a session using Amazon STS
+session = boto3.Session()
+iam_client = session.client('iam')
+
+# Define the trust policy for the role
+trust_policy = {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "sts.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+
+# Define the permissions policy for the role
+permissions_policy = {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:CreatePolicy",
+                "iam:AttachRolePolicy",
+                "sts:AssumeRole",
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:role/hackathon-*",
+                "arn:aws:iam::*:policy/hackathon*",
+                "arn:aws:dynamodb:*:*:table/hackathon-user-table"
+            ]
+        }
+    ]
+}
+
+# Create the IAM role
+role_response = iam_client.create_role(
+    RoleName='hackathon-sts-system-role',
+    AssumeRolePolicyDocument=json.dumps(trust_policy),
+    Description='Role with permissions to manage hackathon resources'
+)
+
+# Attach the permissions policy to the role
+policy_response = iam_client.put_role_policy(
+    RoleName='hackathon-sts-system-role',
+    PolicyName='hackathon-permissions-policy',
+    PolicyDocument=json.dumps(permissions_policy)
+)
+
+print("Role ARN:", role_response['Role']['Arn'])
+
