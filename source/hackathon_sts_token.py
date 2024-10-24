@@ -56,7 +56,42 @@ def generate_sts_token(role_arn, session_name):
         print(f"Error generating STS token: {e}")
         return None
 
+def detach_policies_from_role():
+    dynamodb = boto3.resource('dynamodb')
+    iam = boto3.client('iam')
+
+    table = dynamodb.Table('hackathon-user-table')
+    
+    # Scan DynamoDB table for user IDs
+    response = table.scan()
+    user_ids = [item['userid'] for item in response['Items']]
+    
+    detached_roles = []
+    
+    for userid in user_ids:
+        role_name = f'hackathon-{userid}-iam-role'
+        
+        # List attached policies
+        attached_policies = iam.list_attached_role_policies(RoleName=role_name)
+        
+        # Detach each policy
+        for policy in attached_policies['AttachedPolicies']:
+            iam.detach_role_policy(RoleName=role_name, PolicyArn=policy['PolicyArn'])
+        
+        detached_roles.append(role_name)
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps({'detached_roles': detached_roles})
+    }
+
 def lambda_handler(event, context):
+
+    # Check if the event is a scheduled event
+    if (event['detail-type'] == 'Scheduled Event'):
+        response = detach_policies_from_role()
+        return response
+
     # 1. Get userid from lambda event
     userid = event.get('userid')
     print(f"userid is {userid}")
