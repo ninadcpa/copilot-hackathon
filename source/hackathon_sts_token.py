@@ -88,9 +88,12 @@ def detach_policies_from_role():
 def lambda_handler(event, context):
 
     # Check if the event is a scheduled event
-    if (event['detail-type'] == 'Scheduled Event'):
-        response = detach_policies_from_role()
-        return response
+    try:
+        if (event['detail-type'] == 'Scheduled Event'):
+            response = detach_policies_from_role()
+            return response
+    except Exception as e:
+        pass
 
     # 1. Get userid from lambda event
     userid = event.get('userid')
