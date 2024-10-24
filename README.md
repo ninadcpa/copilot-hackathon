@@ -52,6 +52,9 @@ We levergaed Github-Copilot for following tasks during Hackathon project
 
     - Generating function code for Autherization for AWS credential request
     - Generating function code for dynamically attaching the IAM policy to IAM role and generate temporary AWS creds
+
+    ![image](https://github.com/user-attachments/assets/4087e7d9-fb41-486c-8c14-56683b77a290)
+
     
 > UI Development
 
