@@ -63,6 +63,12 @@ Excution Flow is designed in 3 compnents
    
 ## What did we build as part of Hackathon?
 
+- ✔️ IaaC - Teraform for S3 bucket policy, IAM role, IAM policy, Lambda Function
+- ✔️ Microservice for Authentication using OKTA
+- ✔️ Lambda function for Attaching IAM plocies and Generating STS token
+- ✔️ Functionality for detaching IAM policy after session expiration
+- ❌ UI page for individual user creds generation ( Generated page with github co-pilot but not functional)
+
 # How Github-Copilot assisted for implementing solution?
 
 We levergaed Github-Copilot for following tasks during Hackathon project
