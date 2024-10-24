@@ -75,7 +75,7 @@ We levergaed Github-Copilot for following tasks during Hackathon project
     - Generate Teraform for AWS Lambda code deployment
     - Generate Teraform for AWS API Gateway creation/configuration
 
-    ![GitHub CoPilot Code for S3 Creation](img/hackathon_token.png)
+ (img/hackathon_token.png)
 
 > Microservices Development
 
