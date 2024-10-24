@@ -59,7 +59,7 @@ def lambda_handler(event, context):
 
         def test_successful_execution(monkeypatch):
             def mock_get_policies_for_user(userid):
-    return ["policy1", "policy2"]
+                return ["policy1", "policy2"]
             def mock_create_or_check_iam_role(userid):
                 return "role"
             def mock_generate_sts_credentials(role):
