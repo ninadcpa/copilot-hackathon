@@ -77,7 +77,14 @@ We levergaed Github-Copilot for following tasks during Hackathon project
 
 
 **GitHub Copilot Code Generation for S3 Bucket Creation**
-![GitHub Copilot Code Generation for S3 Creation](img/S3_Bucket_GitHub_CoPilot_Script_Generation.png)
+
+![S3_Bucket Creation](img/S3_Bucket_GitHub_CoPilot_Script_Generation.png)
+
+**GitHub Copilot Code Generation for S3 Bucket Policies**
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_1.png)
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_2.png)
 
 > Microservices Development
 
