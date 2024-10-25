@@ -33,7 +33,34 @@ We would like to build a robust storage platform on top of AWS S3 which
 
 ## Solutioning Approach
 
+Solution to provide Controlled Access to S3 buckets and prefix is based on following **Security Principles**
 
+| Security Principle| Control|
+|-|-|
+|Least Privilege| Separate IAM policies for read-only, read-write and read-write-delete|
+|Separateion of Dutieis | Separate IAM policies for each Bucket|
+|**Minimize Surface Attack**| **Dyanmically evaluation policy and attach for use, detach after use**|
+
+As depicted in below Architecture diagram, the solution will serve 2 actors for their S3 access needs
+- Applications
+- Individual Users
+
+![Architecture](arch_hackathon.png)
+
+Excution Flow is designed in 3 compnents
+
+**Authentication**
+1. Application will invoke Auth API which will Authenticate user through organizations's auth system 
+2. Individual user will use UI which will authenticate with organizations's auth system (OKTA used for hackathon)
+
+**Credential Provider**
+1. App or Individual user will pass authentication token received from previous step while invoking API
+2. Credential provider will parse the token to identify user and lookup corresponding IAM role & IAM policies
+3. Invoke IAM service to attach the policy to IAM role and generate temporary credential using STS token service
+
+**Session Maintenance**
+1. Check for active session and detach IAM policies from IAM role after 1 hour
+   
 ## What did we build as part of Hackathon?
 
 # How Github-Copilot assisted for implementing solution?
@@ -47,6 +74,27 @@ We levergaed Github-Copilot for following tasks during Hackathon project
     - Generate IAM role and IAM policy for specific S3 bucket/prefix access
     - Generate Teraform for AWS Lambda code deployment
     - Generate Teraform for AWS API Gateway creation/configuration
+
+
+**GitHub Copilot Code Generation for S3 Bucket Creation**
+
+![S3_Bucket Creation](img/S3_Bucket_GitHub_CoPilot_Script_Generation.png)
+
+**GitHub Copilot Code Generation for S3 Bucket Policies**
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_1.png)
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_2.png)
+
+**GitHub Copilot Code Generation for Lambda**
+
+![Lambda Creation](img/Lambda_GitHub_CoPilot_Script_Generation.png)
+
+**GitHub Copilot Code Generation for API Gateway**
+
+![API Gateway Creation](img/API_Gateway_GitHub_CoPilot_Script_Generation_1.png)
+
+![API Gateway Creation](img/API_Gateway_GitHub_CoPilot_Script_Generation_2.png)
 
 > Microservices Development
 
@@ -73,6 +121,8 @@ We levergaed Github-Copilot for following tasks during Hackathon project
 > UI Development
 
     - Generating web application code for temporarily requesting AWS creds from UI
+    
+![STS tokens for S3 access](img/hackathon_token.png)
 
 
 

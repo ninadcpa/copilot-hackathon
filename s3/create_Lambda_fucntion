@@ -1,0 +1,22 @@
+import json
+import boto3
+
+def lambda_handler(event, context):
+    sts_client = boto3.client('sts')
+    
+    assumed_role_object = sts_client.assume_role(
+        RoleArn="arn:aws:iam::123456789012:role/hackathon-sts-system-role",
+        RoleSessionName="AssumeRoleSession1"
+    )
+    
+    credentials = assumed_role_object['Credentials']
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps({
+            'AccessKeyId': credentials['AccessKeyId'],
+            'SecretAccessKey': credentials['SecretAccessKey'],
+            'SessionToken': credentials['SessionToken']
+        })
+    }
+
