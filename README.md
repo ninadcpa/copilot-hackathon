@@ -121,6 +121,8 @@ We levergaed Github-Copilot for following tasks during Hackathon project
 > UI Development
 
     - Generating web application code for temporarily requesting AWS creds from UI
+
+![Streamlit UI code for generating AWS credentials](ui/img/ui.png)
     
 ![STS tokens for S3 access](img/hackathon_token.png)
 
