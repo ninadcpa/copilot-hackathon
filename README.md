@@ -67,7 +67,7 @@ Excution Flow is designed in 3 compnents
 - ✔️ Microservice for Authentication using OKTA
 - ✔️ Lambda function for Attaching IAM plocies and Generating STS token
 - ✔️ Functionality for detaching IAM policy after session expiration
-- ❌ UI page for individual user creds generation ( Generated page with github co-pilot but not functional)
+- ✔️ UI page for individual user creds generation ( Generated page with github co-pilot but not functional)
 
 # How Github-Copilot assisted for implementing solution?
 
