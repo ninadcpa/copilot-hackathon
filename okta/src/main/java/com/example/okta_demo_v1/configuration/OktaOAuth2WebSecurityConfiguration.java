@@ -16,7 +16,7 @@ public class OktaOAuth2WebSecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(
-                        (req) -> req.requestMatchers("/api/whoami").authenticated()
+                        (req) -> req.requestMatchers("/api/copilot").authenticated()
                                 .requestMatchers("/**").permitAll()
                 )
                 .oauth2ResourceServer((srv) -> srv.jwt(Customizer.withDefaults()))

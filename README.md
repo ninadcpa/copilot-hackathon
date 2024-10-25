@@ -81,6 +81,27 @@ We levergaed Github-Copilot for following tasks during Hackathon project
     - Generate Teraform for AWS Lambda code deployment
     - Generate Teraform for AWS API Gateway creation/configuration
 
+
+**GitHub Copilot Code Generation for S3 Bucket Creation**
+
+![S3_Bucket Creation](img/S3_Bucket_GitHub_CoPilot_Script_Generation.png)
+
+**GitHub Copilot Code Generation for S3 Bucket Policies**
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_1.png)
+
+![S3_Bucket Policy Creation](img/IAM_Policies_GitHub_CoPilot_Script_Generation_2.png)
+
+**GitHub Copilot Code Generation for Lambda**
+
+![Lambda Creation](img/Lambda_GitHub_CoPilot_Script_Generation.png)
+
+**GitHub Copilot Code Generation for API Gateway**
+
+![API Gateway Creation](img/API_Gateway_GitHub_CoPilot_Script_Generation_1.png)
+
+![API Gateway Creation](img/API_Gateway_GitHub_CoPilot_Script_Generation_2.png)
+
 > Microservices Development
 
     - Generating function code for Autherization for AWS credential request
