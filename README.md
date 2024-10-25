@@ -106,11 +106,35 @@ We levergaed Github-Copilot for following tasks during Hackathon project
 
     - Generating function code for Autherization for AWS credential request
     - Generating function code for dynamically attaching the IAM policy to IAM role and generate temporary AWS creds
-    - Generate Test Cases
+
+**GitHub Copilot Code Generation for AWS Lambda function that does below**
+
+    a.	Get userid from Lambda event passed via AWS PI gateway API calls
+    b.	Check if the userid is in dynamodb table and return list of IAM policies user has access to
+    c.	Create IAM role for user if it doesn’t exist already
+    d.	Attach IAM policies returned by Dynamodb query to IAM role
+    e.	Generate STS credentials for IAM role using AWS STS
+    f. If Lambda is invoked via Eventbus event, detach IAM policies from IAM roles with expired session
     
+![AWS Lambda code](source/img/lambda_code1.png)
+
+**GitHub Copilot Code Generation for AWS Lambda function unit test cases**
+
+![AWS Lambda code unit tests](source/img/lambda_code2.png)
+
+
+
 > UI Development
 
     - Generating web application code for temporarily requesting AWS creds from UI
+
+**GitHub Copilot Code Generation for UI using Python Streamlit**
+
+![Streamlit UI code for generating AWS credentials](ui/img/ui_code.png)
+
+**Simple UI for generating AWS credentials using our system**
+
+![Streamlit UI for generating AWS credentials](ui/img/ui.png)
     
 ![STS tokens for S3 access](img/hackathon_token.png)
 
